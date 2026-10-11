@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apunte: Matemática Inicial | Facundo Sanchez</title>
+    <style>
+        body {
+            background-color: #0a192f;
+            color: #a8b2d1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Fuente legible para lectura larga */
+            line-height: 1.8;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .note-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #112240;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #1d2d50;
+        }
+        h1 { color: #ccd6f6; border-bottom: 2px solid #64ffda; padding-bottom: 10px; }
+        h2 { color: #64ffda; margin-top: 30px; }
+        p { margin-bottom: 20px; }
+        
+        /* Estilo para bloques de código (como en Jupyter/GitHub) */
+        pre {
+            background-color: #020c1b;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border-left: 3px solid #64ffda;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #64ffda;
+            font-size: 0.9rem;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #64ffda;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        .back-btn:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="note-container">
+        <a href="index.html" class="back-btn">← Volver al Portfolio</a>
+        
+        <h1>📐 Matemática Inicial: Funciones y Límites</h1>
+        <p><em>Apunte creado por Facundo Sanchez para la comunidad de la UNSAM.</em></p>
+
+        <h2>1. Concepto de Límite</h2>
+        <p>El límite describe el comportamiento de una función a medida que su entrada se acerca a un cierto valor. Es la base del cálculo diferencial.</p>
+
+        <h2>2. Ejemplo Práctico en Python</h2>
+        <p>Podemos aproximar un límite numéricamente usando <code>NumPy</code>. Aquí un ejemplo de cómo evaluar la función f(x) = (x² - 1) / (x - 1) cuando x tiende a 1:</p>
+
+        <pre><code>import numpy as np
+
+def f(x):
+    return (x**2 - 1) / (x - 1)
+
+# Evaluamos valores muy cercanos a 1
+x_vals = np.array([0.9, 0.99, 0.999, 1.001, 1.01, 1.1])
+print("Aproximación del límite:", f(x_vals))</code></pre>
+
+        <h2>3. Tips para el Parcial</h2>
+        <ul>
+            <li>Siempre factorizar antes de evaluar (como en el ejemplo de arriba, es una diferencia de cuadrados).</li>
+            <li>Recordar los límites notables trigonométricos.</li>
+            <li>Practicar con la calculadora solo para verificar, no para resolver.</li>
+        </ul>
+    </div>
+
+</body>
+</html>

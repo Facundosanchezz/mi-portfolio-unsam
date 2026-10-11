@@ -130,6 +130,55 @@
         }
 
         .card a:hover { text-decoration: underline; }
+    /* --- FONDO ANIMADO TECH (Solo para la sección Inicio) --- */
+        #inicio {
+            position: relative;
+            overflow: hidden; /* Evita que la animación se salga */
+        }
+
+        .tech-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: moveGrid 15s linear infinite;
+            z-index: -1;
+            pointer-events: none; /* Para que no interfiera con los clicks */
+        }
+
+        @keyframes moveGrid {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(40px) translateZ(-200px); }
+        }
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8892b0;
+            font-size: 0.9rem;
+            border-top: 1px solid #1d2d50;
+            margin-top: 50px;
+        }
+        .social-links {
+            margin-bottom: 15px;
+        }
+        .social-links a {
+            color: #ccd6f6;
+            text-decoration: none;
+            margin: 0 15px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #64ffda;
+        }
     </style>
 </head>
 <body>
@@ -148,6 +197,8 @@
         
         <!-- INICIO -->
         <section id="inicio">
+            <div class="tech-grid"></div> <!-- ¡Agrega esta línea! -->
+
             <p class="accent">Hola, mi nombre es</p>
             <h1>Facundo Sanchez.</h1>
             <!-- El texto tipeado aparecerá aquí -->
@@ -214,7 +265,7 @@
                     <p>Resúmenes de las primeras materias: lógica, funciones y cálculo básico con enfoque en resolución de problemas.</p>
                     <span class="tag">UNSAM</span>
                     <span class="tag">Cálculo</span>
-                    <a href="#">Ver apuntes →</a>
+                    <a href="apuntes-mate.html">Ver apuntes →</a>
                 </div>
 
                 <div class="card">
@@ -234,7 +285,15 @@
                 </div>
             </div>
         </section>
-
+        <!-- FOOTER -->
+        <footer>
+            <div class="social-links">
+                <!-- REEMPLAZA ESTOS LINKS CON LOS TUYOS REALES -->
+                <a href="https://github.com/Facundosanchezz" target="_blank">GitHub</a>
+                <a href="mailto:facusnchz30@gmail.com">Email</a>
+            </div>
+            <p>Diseñado y construido por Facundo Sanchez © 2026</p>
+        </footer>
     </div>
 
     <!-- JAVASCRIPT: El efecto de tipeo -->
