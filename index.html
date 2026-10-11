@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facundo Sanchez | Física Médica & Data</title>
     <style>
-        /* --- ESTILOS GENERALES --- */
+        /* --- ESTILOS GENERALES Y FONDO DEGRADADO OSCURO --- */
         body {
-            background-color: #0a192f;
+            /* Degradado radial profundo: un azul ligeramente más claro arriba, cayendo a un azul casi negro abajo */
+            background: radial-gradient(ellipse at top, #112240 0%, #0a192f 40%, #020c1b 100%);
+            background-attachment: fixed; /* El fondo se queda quieto al hacer scroll, da sensación de profundidad */
             color: #8892b0;
             font-family: 'Courier New', Courier, monospace;
             margin: 0;
@@ -22,15 +24,15 @@
             padding: 20px;
         }
 
-        /* --- MENÚ DE NAVEGACIÓN --- */
+        /* --- MENÚ DE NAVEGACIÓN (Más oscuro y sutil) --- */
         nav {
-            background-color: rgba(10, 25, 47, 0.95);
+            background: rgba(2, 12, 27, 0.85); /* Azul casi negro semi-transparente */
             padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid #1d2d50;
-            backdrop-filter: blur(10px); /* Efecto de vidrio esmerilado */
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(12px);
         }
 
         nav ul {
@@ -46,74 +48,103 @@
             color: #ccd6f6;
             text-decoration: none;
             font-size: 0.9rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
 
         nav a:hover { color: #64ffda; }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #64ffda, #00b4d8);
+            transition: width 0.3s;
+        }
+        nav a:hover::after { width: 100%; }
 
         /* --- SECCIONES --- */
         section {
             min-height: 80vh;
             padding-top: 50px;
-            border-top: 1px solid #1d2d50;
+            border-top: 1px solid rgba(100, 255, 218, 0.05); /* Línea divisoria muy sutil */
         }
 
-        h1 { color: #ccd6f6; font-size: 3rem; margin-bottom: 10px; }
-        h2 { color: #64ffda; font-size: 1.8rem; margin-bottom: 30px; }
-        .accent { color: #64ffda; }
+        /* --- TÍTULOS (Sólidos y brillantes sobre el fondo oscuro) --- */
+        h1 { 
+            color: #e6f1ff; /* Blanco azulado muy brillante y limpio */
+            font-size: 3.5rem; 
+            margin-bottom: 10px; 
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
 
-        /* --- EFECTO TYPING (el cursor parpadeante) --- */
+        h2 { 
+            color: #64ffda; 
+            font-size: 1.8rem; 
+            margin-bottom: 30px; 
+        }
+        
+        .accent { color: #64ffda; font-size: 1.1rem; }
+
+        /* --- EFECTO TYPING --- */
         .typing-text {
             border-right: 2px solid #64ffda;
             white-space: nowrap;
             overflow: hidden;
             display: inline-block;
             animation: blink 0.7s infinite;
+            color: #ccd6f6;
         }
 
         @keyframes blink {
             50% { border-color: transparent; }
         }
 
-        /* --- TARJETAS DE PROYECTOS Y APUNTES --- */
+        /* --- TARJETAS (Fondo oscuro con degradado sutil interno) --- */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive automático */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
 
         .card {
-            background-color: #112240; /* Azul un poco más claro que el fondo */
-            border: 1px solid #1d2d50;
-            border-radius: 8px;
+            /* Degradado muy oscuro para dar volumen sin romper la estética dark */
+            background: linear-gradient(180deg, rgba(17, 34, 64, 0.7) 0%, rgba(10, 25, 47, 0.9) 100%);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 12px;
             padding: 25px;
             transition: all 0.3s ease;
             position: relative;
+            backdrop-filter: blur(5px);
         }
 
-        /* Efecto hover: la tarjeta se levanta y brilla */
         .card:hover {
-            transform: translateY(-10px); /* Se levanta */
-            border-color: #64ffda; /* Borde neón */
-            box-shadow: 0 10px 30px -15px rgba(100, 255, 218, 0.3); /* Sombra neón */
+            transform: translateY(-8px);
+            border-color: rgba(100, 255, 218, 0.4);
+            box-shadow: 0 15px 30px -15px rgba(2, 12, 27, 0.7), 0 0 15px rgba(100, 255, 218, 0.1);
         }
 
         .card h3 {
-            color: #ccd6f6;
+            color: #e6f1ff;
             margin-top: 0;
             font-size: 1.3rem;
         }
 
         .card .tag {
             display: inline-block;
-            background-color: rgba(100, 255, 218, 0.1);
+            background: rgba(100, 255, 218, 0.08);
             color: #64ffda;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.75rem;
             margin-right: 5px;
             margin-top: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.15);
         }
 
         .card p {
@@ -127,13 +158,18 @@
             font-size: 0.9rem;
             display: inline-block;
             margin-top: 15px;
+            font-weight: bold;
         }
 
-        .card a:hover { text-decoration: underline; }
-    /* --- FONDO ANIMADO TECH (Solo para la sección Inicio) --- */
+        .card a:hover { 
+            text-decoration: none;
+            text-shadow: 0 0 8px rgba(100, 255, 218, 0.6);
+        }
+
+        /* --- FONDO ANIMADO TECH (Ajustado para fondo más oscuro) --- */
         #inicio {
             position: relative;
-            overflow: hidden; /* Evita que la animación se salga */
+            overflow: hidden;
         }
 
         .tech-grid {
@@ -142,48 +178,51 @@
             left: 0;
             width: 200%;
             height: 200%;
+            /* Aumenté un poco la opacidad (0.08) para que se vea bien sobre el azul más oscuro */
             background-image: 
-                linear-gradient(rgba(100, 255, 218, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(100, 255, 218, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100, 255, 218, 0.08) 1px, transparent 1px);
             background-size: 40px 40px;
             transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
             animation: moveGrid 15s linear infinite;
             z-index: -1;
-            pointer-events: none; /* Para que no interfiera con los clicks */
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
         }
 
         @keyframes moveGrid {
             0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
             100% { transform: perspective(500px) rotateX(60deg) translateY(40px) translateZ(-200px); }
         }
+
         /* --- FOOTER --- */
         footer {
             text-align: center;
             padding: 40px 20px;
             color: #8892b0;
             font-size: 0.9rem;
-            border-top: 1px solid #1d2d50;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
             margin-top: 50px;
+            background: linear-gradient(180deg, transparent, rgba(2, 12, 27, 0.8));
         }
-        .social-links {
-            margin-bottom: 15px;
-        }
+        .social-links { margin-bottom: 15px; }
         .social-links a {
             color: #ccd6f6;
             text-decoration: none;
             margin: 0 15px;
             font-family: 'Courier New', monospace;
             font-weight: bold;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
         .social-links a:hover {
             color: #64ffda;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
         }
     </style>
 </head>
 <body>
 
-    <!-- MENÚ -->
     <nav>
         <ul>
             <li><a href="#inicio">Inicio</a></li>
@@ -195,29 +234,24 @@
 
     <div class="container">
         
-        <!-- INICIO -->
         <section id="inicio">
-            <div class="tech-grid"></div> <!-- ¡Agrega esta línea! -->
-
+            <div class="tech-grid"></div>
             <p class="accent">Hola, mi nombre es</p>
+            <!-- Nombre sólido y brillante, sin degradado en el texto -->
             <h1>Facundo Sanchez.</h1>
-            <!-- El texto tipeado aparecerá aquí -->
             <h2><span id="typing" class="typing-text"></span></h2>
             <p>Soy estudiante de Física Médica en la UNSAM. Estoy explorando el mundo del Data Engineering, Fintech y el análisis de datos con Python.</p>
         </section>
 
-        <!-- SOBRE MÍ -->
         <section id="sobre-mi">
             <h2>// Sobre Mí</h2>
             <p>Mi camino comenzó en la Licenciatura en Física de la UBA, pero encontré mi verdadera vocación en la aplicación práctica de la física en la salud. Hoy estudio Física Médica en la UNSAM y complemento mi formación aprendiendo a manipular, analizar y construir pipelines de datos.</p>
             <p>Creo firmemente que el futuro de la física médica pasa por un fuerte componente de ciencia de datos, y estoy construyendo las herramientas para ser parte de eso.</p>
         </section>
 
-        <!-- PROYECTOS -->
         <section id="proyectos">
             <h2>// Portafolio & Proyectos</h2>
             <div class="cards-grid">
-                
                 <div class="card">
                     <h3>📊 Análisis de Datos en Python</h3>
                     <p>Limpieza, procesamiento y visualización de datasets utilizando Pandas y Matplotlib. Primeros pasos en la manipulación de datos reales.</p>
@@ -250,11 +284,9 @@
                     </div>
                     <a href="#">Próximamente →</a>
                 </div>
-
             </div>
         </section>
 
-        <!-- APUNTES -->
         <section id="apuntes">
             <h2>// La Guía del Estudiante</h2>
             <p>Apuntes, resúmenes y guías que voy armando a lo largo de la carrera. Hechos por un estudiante, para la comunidad.</p>
@@ -285,18 +317,17 @@
                 </div>
             </div>
         </section>
-        <!-- FOOTER -->
+
         <footer>
             <div class="social-links">
-                <!-- REEMPLAZA ESTOS LINKS CON LOS TUYOS REALES -->
                 <a href="https://github.com/Facundosanchezz" target="_blank">GitHub</a>
                 <a href="mailto:facusnchz30@gmail.com">Email</a>
             </div>
             <p>Diseñado y construido por Facundo Sanchez © 2026</p>
         </footer>
+
     </div>
 
-    <!-- JAVASCRIPT: El efecto de tipeo -->
     <script>
         const frases = [
             "Construyo puentes entre la Física Médica y los Datos.",
@@ -311,28 +342,25 @@
 
         function tipear() {
             const fraseActual = frases[indiceFrase];
-            
             if (indiceLetra < fraseActual.length) {
                 elemento.textContent += fraseActual.charAt(indiceLetra);
                 indiceLetra++;
-                setTimeout(tipear, 70); // Velocidad de tipeo
+                setTimeout(tipear, 70);
             } else {
-                setTimeout(borrar, 2000); // Pausa antes de borrar
+                setTimeout(borrar, 2000);
             }
         }
 
         function borrar() {
             if (elemento.textContent.length > 0) {
                 elemento.textContent = elemento.textContent.slice(0, -1);
-                setTimeout(borrar, 40); // Velocidad de borrado
+                setTimeout(borrar, 40);
             } else {
                 indiceFrase = (indiceFrase + 1) % frases.length;
                 indiceLetra = 0;
                 setTimeout(tipear, 500);
             }
         }
-
-        // ¡Arrancar el efecto!
         tipear();
     </script>
 
