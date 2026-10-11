@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portfolio | Física Médica & Data</title>
+    <title>Facundo Sanchez | Física Médica & Data</title>
     <style>
         /* --- ESTILOS GENERALES --- */
         body {
@@ -13,30 +13,31 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            scroll-behavior: smooth; /* ¡Magia! Hace que el scroll sea suave */
+            scroll-behavior: smooth;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* --- EL MENÚ DE NAVEGACIÓN --- */
+        /* --- MENÚ DE NAVEGACIÓN --- */
         nav {
-            background-color: rgba(10, 25, 47, 0.9); /* Fondo oscuro semi-transparente */
+            background-color: rgba(10, 25, 47, 0.95);
             padding: 15px 0;
-            position: sticky; /* Se queda pegado arriba al hacer scroll */
+            position: sticky;
             top: 0;
             z-index: 100;
             border-bottom: 1px solid #1d2d50;
+            backdrop-filter: blur(10px); /* Efecto de vidrio esmerilado */
         }
 
         nav ul {
-            list-style: none; /* Quita los puntitos de la lista */
-            display: flex; /* ¡Magia CSS! Pone los elementos uno al lado del otro */
-            justify-content: center; /* Los centra horizontalmente */
-            gap: 30px; /* Espacio entre cada enlace */
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
             margin: 0;
             padding: 0;
         }
@@ -48,26 +49,92 @@
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: #64ffda; /* Se pone neón al pasar el mouse */
-        }
+        nav a:hover { color: #64ffda; }
 
         /* --- SECCIONES --- */
         section {
-            min-height: 80vh; /* Para que cada sección ocupe casi toda la pantalla y se note el scroll */
+            min-height: 80vh;
             padding-top: 50px;
-            border-top: 1px solid #1d2d50; /* Línea divisoria sutil */
+            border-top: 1px solid #1d2d50;
         }
 
-        h1 { color: #ccd6f6; font-size: 3rem; }
-        h2 { color: #64ffda; font-size: 1.5rem; margin-top: 0; }
-        
+        h1 { color: #ccd6f6; font-size: 3rem; margin-bottom: 10px; }
+        h2 { color: #64ffda; font-size: 1.8rem; margin-bottom: 30px; }
         .accent { color: #64ffda; }
+
+        /* --- EFECTO TYPING (el cursor parpadeante) --- */
+        .typing-text {
+            border-right: 2px solid #64ffda;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* --- TARJETAS DE PROYECTOS Y APUNTES --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive automático */
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: #112240; /* Azul un poco más claro que el fondo */
+            border: 1px solid #1d2d50;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        /* Efecto hover: la tarjeta se levanta y brilla */
+        .card:hover {
+            transform: translateY(-10px); /* Se levanta */
+            border-color: #64ffda; /* Borde neón */
+            box-shadow: 0 10px 30px -15px rgba(100, 255, 218, 0.3); /* Sombra neón */
+        }
+
+        .card h3 {
+            color: #ccd6f6;
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background-color: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            margin-top: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #a8b2d1;
+        }
+
+        .card a {
+            color: #64ffda;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .card a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <!-- MENÚ DE NAVEGACIÓN -->
+    <!-- MENÚ -->
     <nav>
         <ul>
             <li><a href="#inicio">Inicio</a></li>
@@ -79,33 +146,136 @@
 
     <div class="container">
         
-        <!-- SECCIÓN 1: INICIO -->
+        <!-- INICIO -->
         <section id="inicio">
             <p class="accent">Hola, mi nombre es</p>
             <h1>Facundo Sanchez.</h1>
-            <h2>Construyo puentes entre la Física Médica y los Datos.</h2>
+            <!-- El texto tipeado aparecerá aquí -->
+            <h2><span id="typing" class="typing-text"></span></h2>
             <p>Soy estudiante de Física Médica en la UNSAM. Estoy explorando el mundo del Data Engineering, Fintech y el análisis de datos con Python.</p>
         </section>
 
-        <!-- SECCIÓN 2: SOBRE MÍ -->
+        <!-- SOBRE MÍ -->
         <section id="sobre-mi">
             <h2>// Sobre Mí</h2>
-            <p>Aquí iría tu historia. Cómo te diste cuenta de que querías cruzar la física con la programación, qué te gusta de la UNSAM, etc.</p>
+            <p>Mi camino comenzó en la Licenciatura en Física de la UBA, pero encontré mi verdadera vocación en la aplicación práctica de la física en la salud. Hoy estudio Física Médica en la UNSAM y complemento mi formación aprendiendo a manipular, analizar y construir pipelines de datos.</p>
+            <p>Creo firmemente que el futuro de la física médica pasa por un fuerte componente de ciencia de datos, y estoy construyendo las herramientas para ser parte de eso.</p>
         </section>
 
-        <!-- SECCIÓN 3: PROYECTOS -->
+        <!-- PROYECTOS -->
         <section id="proyectos">
             <h2>// Portafolio & Proyectos</h2>
-            <p>Aquí irán tus scripts de Python, análisis de datos y proyectos de Fintech.</p>
+            <div class="cards-grid">
+                
+                <div class="card">
+                    <h3>📊 Análisis de Datos en Python</h3>
+                    <p>Limpieza, procesamiento y visualización de datasets utilizando Pandas y Matplotlib. Primeros pasos en la manipulación de datos reales.</p>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Data Analysis</span>
+                    </div>
+                    <a href="#">Ver en GitHub →</a>
+                </div>
+
+                <div class="card">
+                    <h3>💹 Explorando Fintech & Data Eng</h3>
+                    <p>Proyectos en desarrollo sobre extracción de datos financieros, automatización de procesos y construcción de bases de datos.</p>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">Data Engineering</span>
+                        <span class="tag">Fintech</span>
+                    </div>
+                    <a href="#">Próximamente →</a>
+                </div>
+
+                <div class="card">
+                    <h3>⚛️ Simulaciones de Física</h3>
+                    <p>Modelos computacionales básicos aplicados a fenómenos físicos, uniendo la teoría de la carrera con la programación.</p>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">NumPy</span>
+                        <span class="tag">Física</span>
+                    </div>
+                    <a href="#">Próximamente →</a>
+                </div>
+
+            </div>
         </section>
 
-        <!-- SECCIÓN 4: APUNTES -->
+        <!-- APUNTES -->
         <section id="apuntes">
-            <h2>// La Guía del Estudiante (Apuntes)</h2>
-            <p>Aquí subirás tus resúmenes de Matemática, Física y guías de Python para la comunidad.</p>
+            <h2>// La Guía del Estudiante</h2>
+            <p>Apuntes, resúmenes y guías que voy armando a lo largo de la carrera. Hechos por un estudiante, para la comunidad.</p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>📐 Matemática Inicial</h3>
+                    <p>Resúmenes de las primeras materias: lógica, funciones y cálculo básico con enfoque en resolución de problemas.</p>
+                    <span class="tag">UNSAM</span>
+                    <span class="tag">Cálculo</span>
+                    <a href="#">Ver apuntes →</a>
+                </div>
+
+                <div class="card">
+                    <h3>🍎 Física I</h3>
+                    <p>Cinemática, dinámica y leyes de Newton. Tips y ejercicios clave para encarar los primeros parciales.</p>
+                    <span class="tag">UNSAM</span>
+                    <span class="tag">Mecánica</span>
+                    <a href="#">Ver apuntes →</a>
+                </div>
+
+                <div class="card">
+                    <h3>🐍 Python para Ciencias</h3>
+                    <p>Guía rápida de instalación, entornos virtuales y primeros pasos con NumPy y Pandas para estudiantes de física.</p>
+                    <span class="tag">Python</span>
+                    <span class="tag">Guía</span>
+                    <a href="#">Ver guía →</a>
+                </div>
+            </div>
         </section>
 
     </div>
+
+    <!-- JAVASCRIPT: El efecto de tipeo -->
+    <script>
+        const frases = [
+            "Construyo puentes entre la Física Médica y los Datos.",
+            "Estudiante de Física Médica en la UNSAM.",
+            "Explorando Data Engineering & Fintech.",
+            "Python | Análisis de Datos | Ciencia."
+        ];
+
+        let indiceFrase = 0;
+        let indiceLetra = 0;
+        const elemento = document.getElementById("typing");
+
+        function tipear() {
+            const fraseActual = frases[indiceFrase];
+            
+            if (indiceLetra < fraseActual.length) {
+                elemento.textContent += fraseActual.charAt(indiceLetra);
+                indiceLetra++;
+                setTimeout(tipear, 70); // Velocidad de tipeo
+            } else {
+                setTimeout(borrar, 2000); // Pausa antes de borrar
+            }
+        }
+
+        function borrar() {
+            if (elemento.textContent.length > 0) {
+                elemento.textContent = elemento.textContent.slice(0, -1);
+                setTimeout(borrar, 40); // Velocidad de borrado
+            } else {
+                indiceFrase = (indiceFrase + 1) % frases.length;
+                indiceLetra = 0;
+                setTimeout(tipear, 500);
+            }
+        }
+
+        // ¡Arrancar el efecto!
+        tipear();
+    </script>
 
 </body>
 </html>
