@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día 1: Validación de Datos | Facundo Sanchez</title>
+    <style>
+        body {
+            background: radial-gradient(ellipse at top, #112240 0%, #0a192f 40%, #020c1b 100%);
+            background-attachment: fixed;
+            color: #a8b2d1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .note-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, rgba(17, 34, 64, 0.7) 0%, rgba(10, 25, 47, 0.9) 100%);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        h1 {
+            color: #e6f1ff;
+            border-bottom: 2px solid #64ffda;
+            padding-bottom: 10px;
+        }
+        h2 { color: #64ffda; margin-top: 30px; }
+        h3 { color: #ccd6f6; margin-top: 20px; }
+        p { margin-bottom: 20px; }
+        .context {
+            background: rgba(100, 255, 218, 0.05);
+            border-left: 3px solid #64ffda;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #020c1b;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border-left: 3px solid #64ffda;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #64ffda;
+            font-size: 0.9rem;
+        }
+        .output {
+            background-color: #020c1b;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 3px solid #8892b0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #a8b2d1;
+        }
+        .key-concept {
+            background: rgba(0, 180, 216, 0.08);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .key-concept strong { color: #00b4d8; }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #64ffda;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        .back-btn:hover { text-decoration: underline; }
+        .tag {
+            display: inline-block;
+            background: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="note-container">
+        <a href="index.html" class="back-btn">← Volver al Portfolio</a>
+        
+        <div>
+            <span class="tag">Día 1</span>
+            <span class="tag">Data Engineering</span>
+            <span class="tag">Python</span>
+            <span class="tag">Física Médica</span>
+        </div>
+
+        <h1>🧪 Validación de Datos: Del Laboratorio al Pipeline</h1>
+        <p><em>Primer paso de mi ruta autodidacta en Data Engineering + Data Science</em></p>
+
+        <div class="context">
+            <strong>🎯 Contexto real:</strong> Un laboratorio registra mediciones, pero algunas son incorrectas. 
+            Antes de calcular estadísticas, necesitamos distinguir los datos confiables de los defectuosos. 
+            Esto importa en dos mundos: un pipeline puede automatizar errores, y un modelo estadístico 
+            puede dar resultados engañosos si recibe datos inválidos.
+        </div>
+
+        <h2>1. El problema</h2>
+        <p>Imaginá que recibís una lista de mediciones de un instrumento de laboratorio:</p>
+        <pre><code>mediciones = [1.2, 1.4, 1.3, None, 1.5, "error", 1.1, 1000, 
+              float("nan"), float("inf")]</code></pre>
+        <p>Algunas son números válidos, otras son errores de formato, y otras son números pero fuera del rango permitido por el instrumento.</p>
+
+        <h2>2. La solución: clasificar antes de rechazar</h2>
+        <p>En lugar de simplemente descartar lo que "no sirve", vamos a <strong>clasificar cada error</strong> para entender qué está pasando con los datos.</p>
+
+        <h3>Función de clasificación</h3>
+        <pre><code>import math
+
+MINIMO = -5.0
+MAXIMO = 5.0
+
+def clasificar_medicion(valor):
+    # 1. Comprobar el formato
+    if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+        return "error de formato"
+    
+    # 2. Comprobar si es finito
+    if not math.isfinite(valor):
+        return "número no finito"
+    
+    # 3. Comprobar el rango permitido
+    if not MINIMO <= valor <= MAXIMO:
+        return "fuera de rango"
+    
+    return "válida"</code></pre>
+
+        <div class="key-concept">
+            <strong>💡 Concepto clave: math.isfinite()</strong><br>
+            En Python existen valores numéricos especiales como <code>float("nan")</code> (Not a Number) 
+            e <code>float("inf")</code> (infinito). <code>math.isfinite()</code> devuelve <code>True</code> 
+            solo si el número es finito, excluyendo estos casos especiales que romperían cualquier cálculo.
+        </div>
+
+        <h2>3. Generando el informe de calidad</h2>
+        <p>Ahora recorremos las mediciones, las clasificamos y generamos un reporte:</p>
+        <pre><code>validas = []
+conteo_errores = {
+    "error de formato": 0,
+    "número no finito": 0,
+    "fuera de rango": 0
+}
+
+for medicion in mediciones:
+    categoria = clasificar_medicion(medicion)
+    if categoria == "válida":
+        validas.append(medicion)
+    else:
+        conteo_errores[categoria] += 1
+
+# Informe
+print(f"Total recibidas: {len(mediciones)}")
+print(f"Válidas: {len(validas)}")
+for tipo, cantidad in conteo_errores.items():
+    print(f"  - {tipo}: {cantidad}")
+
+if validas:
+    promedio = sum(validas) / len(validas)
+    print(f"Promedio: {round(promedio, 3)}")</code></pre>
+
+        <h3>Salida del programa:</h3>
+        <div class="output">
+Total recibidas: 10<br>
+Válidas: 5<br>
+  - error de formato: 2<br>
+  - número no finito: 2<br>
+  - fuera de rango: 1<br>
+Promedio: 1.3
+        </div>
+
+        <h2>4. Lo que aprendí</h2>
+        <ul>
+            <li><strong>Separación de responsabilidades:</strong> la función clasifica, el código principal reporta. Cada cosa en su lugar.</li>
+            <li><strong>Diccionarios como contadores:</strong> mucho más escalable que tener una variable por cada tipo de error.</li>
+            <li><strong>El patrón validar → clasificar → reportar:</strong> es el corazón de un pipeline de calidad de datos real.</li>
+            <li><strong>Defensa contra datos inválidos:</strong> calcular un promedio con un NaN o un 1000 destruiría los resultados.</li>
+        </ul>
+
+        <div class="key-concept">
+            <strong>🔗 Conexión con Física Médica:</strong><br>
+            En un laboratorio de dosimetría (radioterapia), los límites <code>MINIMO</code> y <code>MAXIMO</code> 
+            no se eligen arbitrariamente: representan el rango físico válido del instrumento. Un valor fuera 
+            de rango puede indicar un sensor dañado o una medición corrupta. Este mismo código podría usarse 
+            para validar lecturas de cámaras de ionización, detectores de radiación, etc.
+        </div>
+
+        <h2>5. Próximo paso: Día 2</h2>
+        <p>Ahora que sabemos clasificar datos manualmente, en el Día 2 vamos a hacer lo mismo pero con <strong>Pandas</strong>, 
+        la herramienta estándar para análisis de datos en Python. Vamos a conectar este ejercicio con tu práctica 
+        de análisis de datos.</p>
+    </div>
+
+</body>
+</html>
