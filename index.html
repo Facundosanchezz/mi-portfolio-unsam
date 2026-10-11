@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portfolio | Física Médica & Data</title>
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        body {
+            background-color: #0a192f;
+            color: #8892b0;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* ¡Magia! Hace que el scroll sea suave */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- EL MENÚ DE NAVEGACIÓN --- */
+        nav {
+            background-color: rgba(10, 25, 47, 0.9); /* Fondo oscuro semi-transparente */
+            padding: 15px 0;
+            position: sticky; /* Se queda pegado arriba al hacer scroll */
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #1d2d50;
+        }
+
+        nav ul {
+            list-style: none; /* Quita los puntitos de la lista */
+            display: flex; /* ¡Magia CSS! Pone los elementos uno al lado del otro */
+            justify-content: center; /* Los centra horizontalmente */
+            gap: 30px; /* Espacio entre cada enlace */
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #ccd6f6;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #64ffda; /* Se pone neón al pasar el mouse */
+        }
+
+        /* --- SECCIONES --- */
+        section {
+            min-height: 80vh; /* Para que cada sección ocupe casi toda la pantalla y se note el scroll */
+            padding-top: 50px;
+            border-top: 1px solid #1d2d50; /* Línea divisoria sutil */
+        }
+
+        h1 { color: #ccd6f6; font-size: 3rem; }
+        h2 { color: #64ffda; font-size: 1.5rem; margin-top: 0; }
+        
+        .accent { color: #64ffda; }
+    </style>
+</head>
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#sobre-mi">Sobre Mí</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#apuntes">Apuntes</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <!-- SECCIÓN 1: INICIO -->
+        <section id="inicio">
+            <p class="accent">Hola, mi nombre es</p>
+            <h1>Facundo Sanchez.</h1>
+            <h2>Construyo puentes entre la Física Médica y los Datos.</h2>
+            <p>Soy estudiante de Física Médica en la UNSAM. Estoy explorando el mundo del Data Engineering, Fintech y el análisis de datos con Python.</p>
+        </section>
+
+        <!-- SECCIÓN 2: SOBRE MÍ -->
+        <section id="sobre-mi">
+            <h2>// Sobre Mí</h2>
+            <p>Aquí iría tu historia. Cómo te diste cuenta de que querías cruzar la física con la programación, qué te gusta de la UNSAM, etc.</p>
+        </section>
+
+        <!-- SECCIÓN 3: PROYECTOS -->
+        <section id="proyectos">
+            <h2>// Portafolio & Proyectos</h2>
+            <p>Aquí irán tus scripts de Python, análisis de datos y proyectos de Fintech.</p>
+        </section>
+
+        <!-- SECCIÓN 4: APUNTES -->
+        <section id="apuntes">
+            <h2>// La Guía del Estudiante (Apuntes)</h2>
+            <p>Aquí subirás tus resúmenes de Matemática, Física y guías de Python para la comunidad.</p>
+        </section>
+
+    </div>
+
+</body>
+</html>
