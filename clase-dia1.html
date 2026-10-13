@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase Día 1: Validación de Datos | Facundo Sanchez</title>
+    <style>
+        body {
+            background: radial-gradient(ellipse at top, #112240 0%, #0a192f 40%, #020c1b 100%);
+            background-attachment: fixed;
+            color: #a8b2d1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .pdf-container {
+            width: 100%;
+            max-width: 900px;
+            background: #112240;
+            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .back-btn {
+            color: #64ffda;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .back-btn:hover { text-decoration: underline; }
+        
+        .download-btn {
+            background: linear-gradient(90deg, #64ffda, #00b4d8);
+            color: #0a192f;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+        }
+
+        /* El visor de PDF */
+        .pdf-viewer {
+            width: 100%;
+            height: 80vh; /* Ocupa el 80% de la altura de la pantalla */
+            border: none;
+            border-radius: 8px;
+            background-color: #ffffff; /* Fondo blanco para el PDF */
+        }
+
+        /* Mensaje para móviles */
+        .mobile-notice {
+            display: none;
+            text-align: center;
+            color: #64ffda;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .pdf-viewer { display: none; } /* Ocultar iframe en celulares */
+            .mobile-notice { display: block; } /* Mostrar aviso en celulares */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pdf-container">
+        <div class="header">
+            <a href="index.html" class="back-btn">← Volver al Portfolio</a>
+            <!-- Enlace directo al archivo PDF -->
+            <a href="clase-dia1.pdf" class="download-btn" download>⬇ Descargar PDF</a>
+        </div>
+
+        <!-- Visor de PDF para PC -->
+        <iframe src="clase-dia1.pdf" class="pdf-viewer" title="Clase Día 1 LaTeX">
+            Tu navegador no soporta la visualización de PDFs. Por favor, usa el botón de descarga.
+        </iframe>
+
+        <!-- Aviso para celulares -->
+        <p class="mobile-notice">
+            📱 Estás en un dispositivo móvil. Para la mejor experiencia, <a href="clase-dia1.pdf" style="color:#64ffda;">hacé clic aquí para descargar o abrir el PDF</a>.
+        </p>
+    </div>
+
+</body>
+</html>
